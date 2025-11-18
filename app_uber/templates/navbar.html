@@ -1,0 +1,126 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio_uber' %}">
+            <i class="fas fa-car-alt"></i> Sistema de Administración Uber
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+                
+                <!-- INICIO -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'inicio_uber' %}">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                </li>
+
+                <!-- USUARIO PASAJERO -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPasajeros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-friends"></i> Usuario Pasajero
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownPasajeros">
+                        <li><a class="dropdown-item" href="{% url 'agregar_usuario_pasajero' %}">Agregar Usuario Pasajero</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_usuario_pasajero' %}">Ver Usuario Pasajero</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Usuario Pasajero</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Usuario Pasajero</a></li>
+                    </ul>
+                </li>
+                
+                <!-- CHOFER -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownChoferes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-id-card"></i> Chofer
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownChoferes">
+                        <li><a class="dropdown-item" href="{% url 'agregar_chofer' %}">Agregar Chofer</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_chofer' %}">Ver Chofer</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Chofer</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Chofer</a></li>
+                    </ul>
+                </li>
+
+                <!-- VIAJES -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownViajes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-route"></i> Viajes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownViajes">
+                        <li><a class="dropdown-item" href="{% url 'agregar_viaje' %}">Agregar Viaje</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_viaje' %}">Ver Viaje</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Viaje</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Viaje</a></li>
+                    </ul>
+                </li>
+
+                <!-- VEHÍCULOS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownVehiculos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-car"></i> Vehículos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownVehiculos">
+                        <li><a class="dropdown-item" href="{% url 'agregar_vehiculo' %}">Agregar Vehículo</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_vehiculo' %}">Ver Vehículos</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Vehículo</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Vehículo</a></li>
+                    </ul>
+                </li>
+
+                <!-- PAGOS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPagos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-money-bill-wave"></i> Pagos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownPagos">
+                        <li><a class="dropdown-item" href="{% url 'agregar_pago' %}">Agregar Pago</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_pagos' %}">Ver Pagos</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Pago</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Pago</a></li>
+                    </ul>
+                </li>
+
+                <!-- TARJETAS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTarjetas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-credit-card"></i> Tarjetas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownTarjetas">
+                        <li><a class="dropdown-item" href="{% url 'agregar_tarjeta' %}">Agregar Tarjeta</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_tarjetas' %}">Ver Tarjetas</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Tarjeta</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Tarjeta</a></li>
+                    </ul>
+                </li>
+
+                <!-- COMENTARIOS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownComentarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-comments"></i> Comentarios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownComentarios">
+                        <li><a class="dropdown-item" href="{% url 'agregar_comentario' %}">Agregar Comentario</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_comentarios' %}">Ver Comentarios</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Comentario</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Comentario</a></li>
+                    </ul>
+                </li>
+
+                <!-- CUENTA DUEÑO -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDueno" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-cog"></i> Cuenta Dueño
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownDueno">
+                        <li><a class="dropdown-item" href="{% url 'agregar_cuenta_dueno' %}">Agregar Cuenta</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_cuentas_dueno' %}">Ver Cuentas</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar Cuenta</a></li>
+                        <li><a class="dropdown-item" href="#">Borrar Cuenta</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

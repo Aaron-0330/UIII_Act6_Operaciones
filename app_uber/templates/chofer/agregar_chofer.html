@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Chofer{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: #007bff;">Agregar Nuevo Chofer</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg p-4" style="border-radius: 15px; border: none;">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="licencia" class="form-label">Licencia:</label>
+                            <input type="text" class="form-control" id="licencia" name="licencia" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono:</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección:</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edad" class="form-label">Edad:</label>
+                            <input type="number" class="form-control" id="edad" name="edad" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_ingreso" class="form-label">Fecha de Ingreso:</label>
+                            <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" required style="border-radius: 8px;">
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-plus-circle"></i> Agregar Chofer
+                            </button>
+                            <a href="{% url 'ver_chofer' %}" class="btn btn-outline-secondary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-arrow-left"></i> Volver a la Lista
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

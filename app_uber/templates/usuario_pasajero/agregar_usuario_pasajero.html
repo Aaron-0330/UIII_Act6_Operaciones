@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Usuario Pasajero{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: #007bff;">Agregar Nuevo Usuario Pasajero</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg p-4" style="border-radius: 15px; border: none;">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono:</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección:</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="genero" class="form-label">Género:</label>
+                            <select class="form-select" id="genero" name="genero" required style="border-radius: 8px;">
+                                <option value="">Seleccione...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ciudad" class="form-label">Ciudad:</label>
+                            <input type="text" class="form-control" id="ciudad" name="ciudad" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="chofer_preferido" class="form-label">Chofer Preferido:</label>
+                            <select class="form-select" id="chofer_preferido" name="chofer_preferido" style="border-radius: 8px;">
+                                <option value="">Ninguno</option>
+                                {% for chofer in choferes %}
+                                    <option value="{{ chofer.id_chofer }}">{{ chofer.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-plus-circle"></i> Agregar Pasajero
+                            </button>
+                            <a href="{% url 'ver_usuario_pasajero' %}" class="btn btn-outline-secondary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-arrow-left"></i> Volver a la Lista
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

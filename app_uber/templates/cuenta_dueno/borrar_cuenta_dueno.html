@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Cuenta{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger shadow">
+        <h4>Eliminar Configuración</h4>
+        <p>¿Eliminar la configuración <strong>{{ cuenta.nombre }}</strong>?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'ver_cuentas_dueno' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

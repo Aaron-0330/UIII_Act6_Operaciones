@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Actualizar Vehículo{% endblock %}
+
+{% block content %}
+    <h1>Actualizar Vehículo</h1>
+    <form action="{% url 'realizar_actualizacion_vehiculo' vehiculo.pk %}" method="POST">
+        {% csrf_token %}
+        <label>Chofer:</label>
+        <select name="chofer" required>
+            {% for chofer in choferes %}
+                <option value="{{ chofer.pk }}" {% if chofer.pk == vehiculo.chofer.pk %}selected{% endif %}>
+                    {{ chofer.nombre }}
+                </option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Marca:</label>
+        <input type="text" name="marca_carro" value="{{ vehiculo.marca_carro }}" required><br><br>
+
+        <label>Modelo:</label>
+        <input type="text" name="modelo_carro" value="{{ vehiculo.modelo_carro }}" required><br><br>
+
+        <label>Matrícula:</label>
+        <input type="text" name="matricula" value="{{ vehiculo.matricula }}" required><br><br>
+
+        <label>Tipo de Carro:</label>
+        <input type="text" name="tipo_carro" value="{{ vehiculo.tipo_carro }}" required><br><br>
+
+        <button type="submit">Actualizar</button>
+    </form>
+    <a href="{% url 'ver_vehiculo' %}">Cancelar</a>
+{% endblock %}

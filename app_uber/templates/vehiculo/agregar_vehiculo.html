@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Vehículo{% endblock %}
+
+{% block content %}
+    <h1>Agregar Nuevo Vehículo</h1>
+    <form action="{% url 'agregar_vehiculo' %}" method="POST">
+        {% csrf_token %}
+        <label>Chofer:</label>
+        <select name="chofer" required>
+            {% for chofer in choferes %}
+                <option value="{{ chofer.pk }}">{{ chofer.nombre }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Marca:</label>
+        <input type="text" name="marca_carro" required><br><br>
+
+        <label>Modelo:</label>
+        <input type="text" name="modelo_carro" required><br><br>
+
+        <label>Matrícula:</label>
+        <input type="text" name="matricula" required><br><br>
+
+        <label>Tipo de Carro:</label>
+        <input type="text" name="tipo_carro" required><br><br>
+
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{% url 'ver_vehiculo' %}">Volver a la lista</a>
+{% endblock %}

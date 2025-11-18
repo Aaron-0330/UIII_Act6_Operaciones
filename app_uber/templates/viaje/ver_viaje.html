@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Ver Viajes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: #007bff;">Historial y Gestión de Viajes</h2>
+    <div class="text-end mb-3">
+        <a href="{% url 'agregar_viaje' %}" class="btn btn-success" style="border-radius: 8px;">
+            <i class="fas fa-plus"></i> Planificar Nuevo Viaje
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped shadow-sm" style="border-radius: 10px; overflow: hidden;">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Destino</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora Salida</th>
+                    <th scope="col">Duración</th>
+                    <th scope="col">Costo</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Chofer</th>
+                    <th scope="col">Pasajeros</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for viaje in viajes %}
+                <tr>
+                    <th scope="row">{{ viaje.id_viaje }}</th>
+                    <td>{{ viaje.destino }}</td>
+                    <td>{{ viaje.fecha }}</td>
+                    <td>{{ viaje.hora_salida }}</td>
+                    <td>{{ viaje.duracion }}</td>
+                    <td>${{ viaje.costo }}</td>
+                    <td>
+                        {% if viaje.estatus == "Completado" %}
+                            <span class="badge bg-success">{{ viaje.estatus }}</span>
+                        {% elif viaje.estatus == "En Curso" %}
+                            <span class="badge bg-warning text-dark">{{ viaje.estatus }}</span>
+                        {% elif viaje.estatus == "Cancelado" %}
+                            <span class="badge bg-danger">{{ viaje.estatus }}</span>
+                        {% else %}
+                            <span class="badge bg-info text-dark">{{ viaje.estatus }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ viaje.chofer.nombre }}</td>
+                    <td>
+                        {% for pasajero in viaje.pasajeros.all %}
+                            <span class="badge bg-secondary">{{ pasajero.nombre }}</span>{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            N/A
+                        {% endfor %}
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'actualizar_viaje' viaje.id_viaje %}" class="btn btn-info btn-sm me-2" style="border-radius: 5px;">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a href="{% url 'borrar_viaje' viaje.id_viaje %}" class="btn btn-danger btn-sm" style="border-radius: 5px;">
+                            <i class="fas fa-trash-alt"></i> Borrar
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="10" class="text-center py-4">No hay viajes planificados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

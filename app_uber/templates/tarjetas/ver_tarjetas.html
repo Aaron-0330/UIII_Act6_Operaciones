@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Tarjetas{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-4">
+        <h2><i class="fas fa-wallet"></i> Billetera Digital</h2>
+        <a href="{% url 'agregar_tarjeta' %}" class="btn btn-dark">Agregar Tarjeta</a>
+    </div>
+    <div class="row">
+        {% for t in tarjetas %}
+        <div class="col-md-4 mb-4">
+            <div class="card bg-secondary text-white shadow h-100">
+                <div class="card-header border-0 d-flex justify-content-between">
+                    <span>{{ t.tipo_tarjeta }}</span>
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center mt-3 mb-4">**** **** **** {{ t.numero_tarjeta|slice:"-4:" }}</h5>
+                    <div class="d-flex justify-content-between small">
+                        <span>{{ t.usuario.nombre }}</span>
+                        <span>{{ t.fecha_vencimiento|date:"m/y" }}</span>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark border-0 text-end">
+                    <a href="{% url 'actualizar_tarjeta' t.pk %}" class="text-light me-2"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'borrar_tarjeta' t.pk %}" class="text-danger"><i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">No hay tarjetas registradas.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

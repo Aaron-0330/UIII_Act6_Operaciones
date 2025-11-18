@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Registrar Pago{% endblock %}
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-5">
+            <h3 class="text-center mb-4 text-success"><i class="fas fa-coins"></i> Nuevo Pago</h3>
+            <form action="{% url 'agregar_pago' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="number" step="0.01" name="monto" class="form-control" id="montoInput" placeholder="0.00" required>
+                    <label for="montoInput">Monto ($)</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select name="metodo_pago" class="form-select" id="metodoSelect">
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta de Crédito/Débito</option>
+                        <option value="Transferencia">Transferencia</option>
+                    </select>
+                    <label for="metodoSelect">Método de Pago</label>
+                </div>
+                <button type="submit" class="btn btn-success w-100 py-2">Registrar</button>
+                <a href="{% url 'ver_pagos' %}" class="btn btn-link w-100 mt-2 text-decoration-none text-muted">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Editar Tarjeta{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto shadow" style="max-width: 600px;">
+        <div class="card-header bg-warning">
+            <h4 class="mb-0">Editar Tarjeta</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'realizar_actualizacion_tarjeta' tarjeta.pk %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Usuario</label>
+                    <select name="usuario" class="form-select">
+                        {% for u in usuarios %}
+                            <option value="{{ u.pk }}" {% if u.pk == tarjeta.usuario.pk %}selected{% endif %}>
+                                {{ u.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Número</label>
+                    <input type="text" name="numero_tarjeta" value="{{ tarjeta.numero_tarjeta }}" class="form-control" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Tipo</label>
+                        <input type="text" name="tipo_tarjeta" value="{{ tarjeta.tipo_tarjeta }}" class="form-control" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Vence</label>
+                        <input type="date" name="fecha_vencimiento" value="{{ tarjeta.fecha_vencimiento|date:'Y-m-d' }}" class="form-control" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">CVV</label>
+                        <input type="number" name="cv" value="{{ tarjeta.cv }}" class="form-control" required>
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-warning">Actualizar</button>
+                    <a href="{% url 'ver_tarjetas' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

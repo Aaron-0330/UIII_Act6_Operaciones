@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Comentario{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger shadow">
+        <h4>Borrar Comentario</h4>
+        <p>¿Estás seguro de borrar el comentario sobre el chofer <strong>{{ comentario.chofer.nombre }}</strong>?</p>
+        <blockquote class="blockquote fs-6">"{{ comentario.comentario }}"</blockquote>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, borrar</button>
+            <a href="{% url 'ver_comentarios' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

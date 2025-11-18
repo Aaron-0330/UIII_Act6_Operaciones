@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Editar Comentario{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto shadow" style="max-width: 700px;">
+        <div class="card-header bg-warning">
+            <h4 class="mb-0">Editar Comentario</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'realizar_actualizacion_comentario' comentario.pk %}" method="POST">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Chofer</label>
+                        <select name="chofer" class="form-select">
+                            {% for c in choferes %}
+                                <option value="{{ c.pk }}" {% if c.pk == comentario.chofer.pk %}selected{% endif %}>{{ c.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Viaje</label>
+                        <select name="viaje" class="form-select">
+                            {% for v in viajes %}
+                                <option value="{{ v.pk }}" {% if v.pk == comentario.viaje.pk %}selected{% endif %}>{{ v.destino }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Comentario</label>
+                    <textarea name="comentario" class="form-control" rows="4">{{ comentario.comentario }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Puntaje</label>
+                    <input type="number" name="num_resena" value="{{ comentario.num_resena }}" class="form-control" min="1" max="5">
+                </div>
+                <button type="submit" class="btn btn-warning">Actualizar</button>
+                <a href="{% url 'ver_comentarios' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

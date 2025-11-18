@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Editar Cuenta{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto shadow" style="max-width: 600px;">
+        <div class="card-header bg-warning">
+            <h4 class="mb-0">Editar Configuración</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'realizar_actualizacion_cuenta_dueno' cuenta.pk %}" method="POST">
+                {% csrf_token %}
+                
+                <!-- CAMBIO AQUÍ: Select que recuerda la selección anterior -->
+                <div class="mb-3">
+                    <label class="form-label">Nombre (Chofer)</label>
+                    <select name="nombre" class="form-select" required>
+                        {% for c in choferes %}
+                            <option value="{{ c.nombre }}" {% if c.nombre == cuenta.nombre %}selected{% endif %}>
+                                {{ c.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">% Chofer</label>
+                        <input type="number" name="por_chofer" value="{{ cuenta.por_chofer }}" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">% Dueño</label>
+                        <input type="number" name="por_dueno" value="{{ cuenta.por_dueno }}" class="form-control" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning w-100">Actualizar</button>
+                <a href="{% url 'ver_cuentas_dueno' %}" class="btn btn-link w-100 mt-2">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Agregar Tarjeta{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0"><i class="fas fa-credit-card"></i> Nueva Tarjeta</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'agregar_tarjeta' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Usuario Titular</label>
+                            <select name="usuario" class="form-select" required>
+                                {% for u in usuarios %}
+                                    <option value="{{ u.pk }}">{{ u.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Número de Tarjeta</label>
+                            <input type="text" name="numero_tarjeta" class="form-control" placeholder="0000 0000 0000 0000" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tipo</label>
+                                <select name="tipo_tarjeta" class="form-select">
+                                    <option>Visa</option>
+                                    <option>Mastercard</option>
+                                    <option>Amex</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Expira</label>
+                                <input type="date" name="fecha_vencimiento" class="form-control" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">CVV</label>
+                                <input type="number" name="cv" class="form-control" placeholder="123" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Configurar Cuenta{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto shadow" style="max-width: 600px;">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0"><i class="fas fa-chart-pie"></i> Nueva Configuración</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'agregar_cuenta_dueno' %}" method="POST">
+                {% csrf_token %}
+                
+                <!-- CAMBIO AQUÍ: Select en lugar de Input -->
+                <div class="mb-3">
+                    <label class="form-label">Nombre de la Configuración (Seleccionar Chofer)</label>
+                    <select name="nombre" class="form-select" required>
+                        <option value="" selected disabled>Seleccione un chofer...</option>
+                        {% for c in choferes %}
+                            <!-- Guardamos el nombre del chofer como valor -->
+                            <option value="{{ c.nombre }}">{{ c.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">% Porcentaje Chofer</label>
+                        <div class="input-group">
+                            <input type="number" name="por_chofer" class="form-control" placeholder="70" required>
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">% Porcentaje Dueño</label>
+                        <div class="input-group">
+                            <input type="number" name="por_dueno" class="form-control" placeholder="30" required>
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark w-100">Guardar Configuración</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

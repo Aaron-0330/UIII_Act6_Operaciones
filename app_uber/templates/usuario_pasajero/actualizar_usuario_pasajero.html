@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Actualizar Usuario Pasajero{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: #007bff;">Actualizar Usuario Pasajero</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg p-4" style="border-radius: 15px; border: none;">
+                <div class="card-body">
+                    <form method="post" action="{% url 'realizar_actualizacion_usuario_pasajero' pasajero.id_usuario %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ pasajero.nombre }}" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ pasajero.email }}" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono:</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" value="{{ pasajero.telefono }}" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección:</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" value="{{ pasajero.direccion }}" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="genero" class="form-label">Género:</label>
+                            <select class="form-select" id="genero" name="genero" required style="border-radius: 8px;">
+                                <option value="Masculino" {% if pasajero.genero == "Masculino" %}selected{% endif %}>Masculino</option>
+                                <option value="Femenino" {% if pasajero.genero == "Femenino" %}selected{% endif %}>Femenino</option>
+                                <option value="Otro" {% if pasajero.genero == "Otro" %}selected{% endif %}>Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ciudad" class="form-label">Ciudad:</label>
+                            <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ pasajero.ciudad }}" required style="border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="chofer_preferido" class="form-label">Chofer Preferido:</label>
+                            <select class="form-select" id="chofer_preferido" name="chofer_preferido" style="border-radius: 8px;">
+                                <option value="">Ninguno</option>
+                                {% for chofer in choferes %}
+                                    <option value="{{ chofer.id_chofer }}" {% if pasajero.chofer_preferido and pasajero.chofer_preferido.id_chofer == chofer.id_chofer %}selected{% endif %}>
+                                        {{ chofer.nombre }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-save"></i> Actualizar Pasajero
+                            </button>
+                            <a href="{% url 'ver_usuario_pasajero' %}" class="btn btn-outline-secondary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

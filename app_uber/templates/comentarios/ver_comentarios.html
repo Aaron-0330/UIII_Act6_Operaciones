@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Reseñas{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2><i class="fas fa-star text-warning"></i> Reseñas de Clientes</h2>
+    <a href="{% url 'agregar_comentario' %}" class="btn btn-outline-primary my-3">Agregar Comentario</a>
+    
+    <div class="list-group">
+        {% for c in comentarios %}
+        <div class="list-group-item list-group-item-action flex-column align-items-start shadow-sm mb-3 border rounded">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Para: {{ c.chofer.nombre }}</h5>
+                <small class="text-muted">{{ c.fecha_comentario|date:"d M Y" }}</small>
+            </div>
+            <div class="mb-2">
+                <span class="badge bg-warning text-dark"><i class="fas fa-star"></i> {{ c.num_resena }}/5</span>
+            </div>
+            <p class="mb-1 fst-italic">"{{ c.comentario }}"</p>
+            <small class="text-muted">Viaje a: {{ c.viaje.destino }}</small>
+            <div class="mt-2">
+                <a href="{% url 'actualizar_comentario' c.pk %}" class="btn btn-sm btn-light border">Editar</a>
+                <a href="{% url 'borrar_comentario' c.pk %}" class="btn btn-sm btn-light border text-danger">Borrar</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-light border">No hay comentarios registrados.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

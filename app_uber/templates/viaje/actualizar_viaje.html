@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Actualizar Viaje{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: #007bff;">Actualizar Detalles del Viaje</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-7">
+            <div class="card shadow-lg p-4" style="border-radius: 15px; border: none;">
+                <div class="card-body">
+                    <form method="post" action="{% url 'realizar_actualizacion_viaje' viaje.id_viaje %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="destino" class="form-label">Destino:</label>
+                            <input type="text" class="form-control" id="destino" name="destino" value="{{ viaje.destino }}" required style="border-radius: 8px;">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fecha" class="form-label">Fecha:</label>
+                                <input type="date" class="form-control" id="fecha" name="fecha" value="{{ viaje.fecha|date:'Y-m-d' }}" required style="border-radius: 8px;">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="hora_salida" class="form-label">Hora de Salida:</label>
+                                <input type="time" class="form-control" id="hora_salida" name="hora_salida" value="{{ viaje.hora_salida|time:'H:i' }}" required style="border-radius: 8px;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="duracion" class="form-label">Duración (ej: 30 min, 1h 15min):</label>
+                                <input type="text" class="form-control" id="duracion" name="duracion" value="{{ viaje.duracion }}" required style="border-radius: 8px;">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="costo" class="form-label">Costo:</label>
+                                <input type="number" step="0.01" class="form-control" id="costo" name="costo" value="{{ viaje.costo }}" required style="border-radius: 8px;">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estatus" class="form-label">Estatus:</label>
+                            <select class="form-select" id="estatus" name="estatus" required style="border-radius: 8px;">
+                                <option value="Pendiente" {% if viaje.estatus == "Pendiente" %}selected{% endif %}>Pendiente</option>
+                                <option value="En Curso" {% if viaje.estatus == "En Curso" %}selected{% endif %}>En Curso</option>
+                                <option value="Completado" {% if viaje.estatus == "Completado" %}selected{% endif %}>Completado</option>
+                                <option value="Cancelado" {% if viaje.estatus == "Cancelado" %}selected{% endif %}>Cancelado</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="chofer" class="form-label">Chofer:</label>
+                            <select class="form-select" id="chofer" name="chofer" required style="border-radius: 8px;">
+                                <option value="">Seleccione un Chofer</option>
+                                {% for chofer in choferes %}
+                                    <option value="{{ chofer.id_chofer }}" {% if viaje.chofer.id_chofer == chofer.id_chofer %}selected{% endif %}>
+                                        {{ chofer.nombre }} (Lic: {{ chofer.licencia }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pasajeros" class="form-label">Pasajeros (puede seleccionar múltiples):</label>
+                            <select class="form-select" id="pasajeros" name="pasajeros" multiple="multiple" style="border-radius: 8px;">
+                                {% for pasajero in pasajeros_disponibles %}
+                                    <option value="{{ pasajero.id_usuario }}" {% if pasajero.id_usuario in pasajeros_actuales_ids %}selected{% endif %}>
+                                        {{ pasajero.nombre }} ({{ pasajero.email }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-save"></i> Actualizar Viaje
+                            </button>
+                            <a href="{% url 'ver_viaje' %}" class="btn btn-outline-secondary btn-lg" style="border-radius: 8px;">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        $('#pasajeros').select2({
+            placeholder: "Seleccione pasajeros",
+            allowClear: true
+        });
+    });
+</script>
+{% endblock %}

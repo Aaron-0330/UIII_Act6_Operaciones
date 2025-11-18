@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo Comentario{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto shadow" style="max-width: 700px;">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0"><i class="fas fa-comment-dots"></i> Calificar Servicio</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'agregar_comentario' %}" method="POST">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Chofer</label>
+                        <select name="chofer" class="form-select" required>
+                            {% for c in choferes %}
+                                <option value="{{ c.pk }}">{{ c.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Viaje</label>
+                        <select name="viaje" class="form-select" required>
+                            {% for v in viajes %}
+                                <option value="{{ v.pk }}">{{ v.destino }} - {{ v.fecha }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tu Opinión</label>
+                    <textarea name="comentario" class="form-control" rows="4" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Calificación (1-5)</label>
+                    <input type="number" name="num_resena" class="form-control" min="1" max="5" value="5" required>
+                </div>
+                <button type="submit" class="btn btn-info text-white">Publicar</button>
+                <a href="{% url 'ver_comentarios' %}" class="btn btn-link text-muted">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

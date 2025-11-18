@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Vehículo{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger shadow" role="alert">
+        <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> ¿Estás seguro?</h4>
+        <p>Vas a eliminar el vehículo <strong>{{ vehiculo.marca_carro }} ({{ vehiculo.matricula }})</strong>. Esta acción no se puede deshacer.</p>
+        <hr>
+        <form method="POST" class="d-flex gap-2">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar definitivamente</button>
+            <a href="{% url 'ver_vehiculo' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

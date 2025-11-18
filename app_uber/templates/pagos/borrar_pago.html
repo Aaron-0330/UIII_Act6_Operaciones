@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Borrar Pago{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger shadow">
+        <h4 class="alert-heading">¿Eliminar registro de pago?</h4>
+        <p>Se eliminará el pago #{{ pago.id_pago }} por un monto de <strong>${{ pago.monto }}</strong>.</p>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+            <a href="{% url 'ver_pagos' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

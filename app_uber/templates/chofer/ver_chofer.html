@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Ver Choferes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center" style="color: #007bff;">Listado de Choferes</h2>
+    <div class="text-end mb-3">
+        <a href="{% url 'agregar_chofer' %}" class="btn btn-success" style="border-radius: 8px;">
+            <i class="fas fa-plus"></i> Añadir Nuevo Chofer
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped shadow-sm" style="border-radius: 10px; overflow: hidden;">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Licencia</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Fecha Ingreso</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chofer in choferes %}
+                <tr>
+                    <th scope="row">{{ chofer.id_chofer }}</th>
+                    <td>{{ chofer.nombre }}</td>
+                    <td>{{ chofer.licencia }}</td>
+                    <td>{{ chofer.telefono }}</td>
+                    <td>{{ chofer.direccion }}</td>
+                    <td>{{ chofer.email }}</td>
+                    <td>{{ chofer.edad }}</td>
+                    <td>{{ chofer.fecha_ingreso }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'actualizar_chofer' chofer.id_chofer %}" class="btn btn-info btn-sm me-2" style="border-radius: 5px;">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a href="{% url 'borrar_chofer' chofer.id_chofer %}" class="btn btn-danger btn-sm" style="border-radius: 5px;">
+                            <i class="fas fa-trash-alt"></i> Borrar
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9" class="text-center py-4">No hay choferes registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
